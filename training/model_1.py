@@ -20,7 +20,7 @@ val_batches = len(dataset) - train_batches
 train_dataset = dataset.take(train_batches)
 val_dataset = dataset.skip(train_batches)
 
-class_names = dataset.class_namesp
+class_names = dataset.class_names
 
 class_counts = collections.defaultdict(int)
 for _, labels in dataset:
@@ -96,7 +96,7 @@ model.compile(
 history = model.fit(
     train_ds,
     validation_data=val_ds,
-    epochs=5,
+    epochs=50,
     verbose=1,
     class_weight=class_weight_dict,
 )
@@ -104,4 +104,4 @@ history = model.fit(
 scores = model.evaluate(test_ds)
 print(f"Test Accuracy: {scores[1] * 100:.2f}%")
 
-# model.save(os.path.join("../Model", "Version_2.h5"))
+model.save(os.path.join("../final_model", "Version_1.h5"))

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing import image as tf_image
 from PIL import Image
 
-model = tf.keras.models.load_model("../Model/Version_2.h5")
+model = tf.keras.models.load_model("../final_model/Version_1.h5")
 class_names = ["NORMAL", "PNEUMONIA"]
 
 
