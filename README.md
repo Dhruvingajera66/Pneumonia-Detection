@@ -1,2 +1,2 @@
-# Pneumonia-Detection
-🩺 Pneumonia Detection Using Deep Learning This project is an AI-powered Chest X-ray Pneumonia Detection System using Deep Learning (CNNs). The model classifies X-ray images into NORMAL or PNEUMONIA cases with high accuracy. It is designed to assist healthcare professionals in early pneumonia detection.
+🩺 Pneumonia Classification using Deep Learning
+🚀 This project uses Deep Learning to classify chest X-ray images into Normal or Pneumonia using a trained model. A Streamlit-based web application is developed for real-time predictions.
