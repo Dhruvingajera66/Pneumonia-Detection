@@ -1,8 +1,19 @@
 # 🩺 Pneumonia Detection from Chest X-Rays
 
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-Keras-FF6F00?logo=tensorflow&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-app-FF4B4B?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 Deep learning models that classify chest X-ray images as **NORMAL** or **PNEUMONIA**, plus a **Streamlit** web app for uploading an X-ray and getting a prediction with a confidence score.
 
 > ⚠️ **Not a medical device.** This is a learning and portfolio project. It must not be used for clinical diagnosis or treatment decisions.
+
+**How it works**
+
+```
+Chest X-ray (.jpg/.png) → resize to 256×256 → CNN / MobileNetV2 → NORMAL or PNEUMONIA + confidence %
+```
 
 ---
 
@@ -21,7 +32,7 @@ Both models are trained with:
 
 ### Results
 
-Test-set results will be added after the models are retrained with the fixed training pipeline (see [changelog](#changelog)). The `.h5` files currently in the repo were trained before those fixes.
+Test-set results will be added after the models are retrained with the fixed training pipeline (see [CHANGELOG.md](CHANGELOG.md)). The `.h5` files currently in the repo were trained before those fixes.
 
 ---
 
@@ -94,18 +105,16 @@ Pneumonia-Detection/
 ├── frontend/
 │   ├── app.py              # Streamlit web app
 │   └── requirements.txt
+├── CHANGELOG.md
+├── LICENSE
 └── README.md
 ```
 
 ---
 
-## Changelog
+## Recent changes
 
-**Training pipeline fixes**
-- **Validation leak fixed.** The train/val split used `take()`/`skip()` on a dataset that reshuffles every epoch, so validation images leaked into training and validation accuracy was inflated. It now uses `validation_split` + `subset` with a fixed seed (checked: 4,186 train / 1,046 val, 0 overlap).
-- **Augmentation fixed.** `.cache()` ran after the random augmentation, freezing the first epoch's augmented images for every later epoch. Caching now happens before augmentation.
-- **MobileNetV2 input scale fixed.** It was fed `[0, 1]` pixels instead of the `[-1, 1]` its ImageNet weights expect. A `Rescaling` layer inside the model now handles this.
-- Removed an unused `cv2` import that crashed `model_1.py` on a fresh install, and renamed `fontend/` to `frontend/`.
+Fixed a validation leak, frozen augmentation and the MobileNetV2 input scale in the training pipeline. Details in [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
@@ -115,3 +124,9 @@ Pneumonia-Detection/
 - [ ] Move the `.h5` model files to GitHub Releases to keep the repo small
 - [ ] Let the app switch between V1 and V2
 - [ ] Serve the model as a FastAPI endpoint
+
+---
+
+## License
+
+[MIT](LICENSE) © Dhruvin Gajera
